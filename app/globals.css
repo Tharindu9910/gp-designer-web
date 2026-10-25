@@ -1,0 +1,127 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+:root {
+  /* Colors (--bg, --fg, --accent, …) are injected from theme/palette.ts in app/layout.tsx. */
+
+  /* animated per section (BgShift / theme-dark) */
+  --page-bg: var(--bg);
+  --page-fg: var(--fg);
+  --page-accent: var(--accent-2);
+  --page-line: var(--line);
+
+  --gutter: clamp(16px, 2.2vw, 40px);
+  --radius-panel: 28px;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-dark: var(--dark);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-pill: var(--pill);
+  --color-inverse: var(--fg-inverse);
+  --color-on-accent: var(--on-accent);
+  --color-line: var(--line);
+  --color-scrim: var(--scrim);
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.theme-dark {
+  --page-bg: var(--dark);
+  --page-fg: var(--fg-inverse);
+  --page-accent: var(--accent);
+  --page-line: var(--line-dark);
+}
+
+.page-colors {
+  background: var(--page-bg);
+  color: var(--page-fg);
+}
+
+.accent {
+  color: var(--page-accent);
+}
+
+.display {
+  font-weight: 450;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.t-hero {
+  font-size: clamp(3.5rem, 9vw, 9.5rem);
+}
+.t-statement {
+  font-size: clamp(1.6rem, 2.6vw, 2.6rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  font-weight: 450;
+}
+.t-footer {
+  font-size: clamp(4rem, 9vw, 9rem);
+}
+.t-label {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.px-gutter {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+/* Hidden until JS reveals it (prevents a flash before SplitText runs). */
+html.js [data-reveal] {
+  visibility: hidden;
+}
+
+/* Masked lines created by SplitText: keep descenders visible. */
+.split-mask {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Fixed chrome color flips over dark sections. */
+.chrome-ink {
+  color: var(--fg);
+  transition: color 0.35s ease;
+}
+html[data-chrome="dark"] .chrome-ink {
+  color: var(--fg-inverse);
+}
+
+html[data-flipping] [data-flip-target] {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] {
+    visibility: visible;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
